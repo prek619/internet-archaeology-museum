@@ -27,6 +27,13 @@ interface ArtifactCardProps {
   artifact: ArtifactCardData;
 }
 
+const statusAccent: Record<ArtifactStatus, string> = {
+  ACTIVE:       "border-l-[6px] border-l-neo-secondary",
+  DISCONTINUED: "border-l-[6px] border-l-black",
+  DESTROYED:    "border-l-[6px] border-l-neo-accent",
+  ON_LOAN:      "border-l-[6px] border-l-neo-muted",
+};
+
 export default function ArtifactCard({ artifact }: ArtifactCardProps) {
   const [expanded, setExpanded] = useState(false);
 
@@ -34,12 +41,13 @@ export default function ArtifactCard({ artifact }: ArtifactCardProps) {
     <div
       className={[
         "bg-white border-4 border-black",
+        statusAccent[artifact.status],
         "shadow-neo-md transition-all duration-200",
         expanded ? "shadow-neo-lg -translate-y-1" : "hover:shadow-neo-lg hover:-translate-y-1",
       ].join(" ")}
     >
       {/* Visual area — real image or archival notice */}
-      <div className="relative border-b-4 border-black overflow-hidden h-48">
+      <div className="relative border-b-4 border-black h-48 overflow-hidden">
         {artifact.imageUrl ? (
           <Image
             src={artifact.imageUrl}
@@ -57,14 +65,14 @@ export default function ArtifactCard({ artifact }: ArtifactCardProps) {
           />
         )}
 
-        {/* Exhibit number tag */}
-        <div className="absolute top-3 left-3 bg-neo-secondary border-4 border-black px-2 py-1 shadow-neo-sm">
+        {/* Exhibit number — bottom-left to avoid notice headline overlap */}
+        <div className="absolute bottom-3 left-3 bg-neo-secondary border-4 border-black px-2 py-1 shadow-neo-sm">
           <span className="font-black text-xs uppercase tracking-widest">
             {artifact.exhibitNumber}
           </span>
         </div>
 
-        {/* Status badge */}
+        {/* Status badge — top-right */}
         <div className="absolute top-3 right-3">
           <StatusBadge status={artifact.status} />
         </div>

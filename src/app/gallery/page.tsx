@@ -30,13 +30,13 @@ export default async function GalleryPage() {
   const artifactCount = artifacts.length;
 
   return (
-    <div className="min-h-screen bg-neo-bg paper-texture">
-      {/* Sticky header */}
-      <header className="border-b-4 border-black bg-neo-bg sticky top-0 z-30">
+    <div className="min-h-screen bg-neo-bg">
+      {/* Sticky header — yellow so the gallery entrance has presence */}
+      <header className="border-b-4 border-black bg-neo-secondary sticky top-0 z-30">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
           <Link
             href="/"
-            className="font-black text-sm uppercase tracking-widest hover:text-neo-accent transition-colors duration-100"
+            className="font-black text-sm uppercase tracking-widest hover:underline transition-colors duration-100"
           >
             ← Museum
           </Link>
@@ -47,43 +47,60 @@ export default async function GalleryPage() {
           </div>
           <Link
             href="/suggest"
-            className="font-black text-xs uppercase tracking-widest border-4 border-black px-3 py-2 hover:bg-neo-secondary transition-colors duration-100"
+            className="font-black text-xs uppercase tracking-widest border-4 border-black bg-neo-bg px-3 py-2 hover:bg-neo-accent hover:text-black transition-colors duration-100 shadow-neo-sm"
           >
             Suggest →
           </Link>
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
-        {/* Gallery heading block */}
-        <div className="mb-4">
-          <h1 className="font-black text-4xl sm:text-6xl uppercase tracking-tighter leading-none mb-3">
+      {/* Red accent section-label bar */}
+      <div className="border-b-4 border-black bg-neo-accent">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-2 flex items-center justify-between">
+          <span className="font-black text-xs uppercase tracking-[0.2em] text-black">
+            Permanent Collection
+          </span>
+          <span className="font-black text-xs uppercase tracking-widest text-black/60">
+            {artifactCount} Exhibit{artifactCount !== 1 ? "s" : ""}
+          </span>
+        </div>
+      </div>
+
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+        {/* Gallery heading */}
+        <div className="mb-8 border-l-8 border-black pl-5">
+          <h1 className="font-black text-4xl sm:text-6xl uppercase tracking-tighter leading-none mb-2">
             The Collection
           </h1>
-          <div className="flex items-center gap-4 flex-wrap">
-            <p className="font-bold text-base text-black/60">
-              {artifactCount} artifact{artifactCount !== 1 ? "s" : ""} on permanent display.{" "}
-              {artifactCount === 0
-                ? "The museum is preparing its inaugural exhibition."
-                : "Click any exhibit to view the full record."}
-            </p>
-            {/* Inline stamp */}
-            <div className="border-4 border-black bg-neo-bg px-3 py-1 -rotate-1 shadow-neo-sm shrink-0">
-              <span className="font-black text-[10px] uppercase tracking-widest">
-                Open to the Public
-              </span>
-            </div>
-          </div>
+          <p className="font-bold text-base text-black/60">
+            {artifactCount === 0
+              ? "The museum is preparing its inaugural exhibition."
+              : `${artifactCount} artifact${artifactCount !== 1 ? "s" : ""} on permanent display. Click any exhibit to view the full record.`}
+          </p>
         </div>
 
-        {/* Halftone section rule */}
-        <div className="flex items-center gap-3 my-8">
+        {/* Section divider — halftone strip between heading and grid */}
+        <div className="flex items-center gap-3 mb-8">
           <div className="flex-1 border-t-4 border-black" />
           <div
-            className="w-24 h-4 opacity-20"
+            className="w-20 h-3"
             style={{
               backgroundImage: "radial-gradient(#000 1.5px, transparent 1.5px)",
               backgroundSize: "8px 8px",
+              opacity: 0.25,
+            }}
+          />
+          <div className="border-4 border-black bg-neo-bg px-3 py-1 -rotate-1 shadow-neo-sm">
+            <span className="font-black text-[9px] uppercase tracking-widest">
+              Floor 1
+            </span>
+          </div>
+          <div
+            className="w-20 h-3"
+            style={{
+              backgroundImage: "radial-gradient(#000 1.5px, transparent 1.5px)",
+              backgroundSize: "8px 8px",
+              opacity: 0.25,
             }}
           />
           <div className="flex-1 border-t-4 border-black" />
@@ -99,37 +116,38 @@ export default async function GalleryPage() {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {artifacts.map((artifact) => (
-              <ArtifactCard key={artifact.id} artifact={artifact} />
-            ))}
-          </div>
-        )}
-
-        {/* Status key */}
-        {artifactCount > 0 && (
-          <div className="mt-12 border-4 border-black bg-white p-5">
-            <p className="font-black text-xs uppercase tracking-widest text-black/40 mb-3">
-              Status Key
-            </p>
-            <div className="flex flex-wrap gap-4">
-              {[
-                { label: "Active", bg: "bg-neo-secondary" },
-                { label: "Discontinued", bg: "bg-neo-bg" },
-                { label: "Destroyed", bg: "bg-black text-white" },
-                { label: "On Loan", bg: "bg-neo-muted" },
-              ].map(({ label, bg }) => (
-                <span
-                  key={label}
-                  className={`inline-block px-3 py-1 border-4 border-black font-black text-xs uppercase tracking-widest ${bg}`}
-                >
-                  {label}
-                </span>
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {artifacts.map((artifact) => (
+                <ArtifactCard key={artifact.id} artifact={artifact} />
               ))}
             </div>
-          </div>
+
+            {/* Legend panel — yellow background, bold status key */}
+            <div className="mt-12 border-4 border-black bg-neo-secondary shadow-neo-md p-5">
+              <p className="font-black text-xs uppercase tracking-[0.2em] text-black mb-4">
+                Status Key
+              </p>
+              <div className="flex flex-wrap gap-4">
+                {[
+                  { label: "Active",        bg: "bg-neo-secondary border-neo-secondary", accent: "border-l-[6px] border-l-neo-secondary" },
+                  { label: "Discontinued",  bg: "bg-neo-bg",                            accent: "border-l-[6px] border-l-black" },
+                  { label: "Destroyed",     bg: "bg-neo-accent",                        accent: "border-l-[6px] border-l-neo-accent" },
+                  { label: "On Loan",       bg: "bg-neo-muted",                         accent: "border-l-[6px] border-l-neo-muted" },
+                ].map(({ label, bg, accent }) => (
+                  <div key={label} className="flex items-center gap-2">
+                    <div className={`w-4 h-4 border-4 border-black ${bg}`} />
+                    <span className="font-black text-xs uppercase tracking-widest">
+                      {label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </>
         )}
 
+        {/* Footer */}
         <div className="mt-8 border-t-4 border-black pt-6 flex justify-between items-center">
           <p className="font-black text-xs uppercase tracking-widest text-black/40">
             End of Collection

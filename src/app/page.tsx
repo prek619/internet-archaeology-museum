@@ -39,7 +39,7 @@ export default async function HomePage() {
           {/* Left — hero text */}
           <div>
             {/* Institution label */}
-            <div className="animate-fade-up inline-block border-4 border-black bg-neo-muted px-4 py-2 mb-8 -rotate-1 shadow-neo-sm">
+            <div className="animate-fade-up inline-block border-4 border-black bg-neo-accent px-4 py-2 mb-8 -rotate-1 shadow-neo-sm">
               <span className="font-black text-xs uppercase tracking-widest">
                 A Digital Institution
               </span>
