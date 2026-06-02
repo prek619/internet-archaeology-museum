@@ -13,12 +13,13 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const { releaseYear, ...rest } = parsed.data;
+  const { releaseYear, imageNote, ...rest } = parsed.data;
 
   const suggestion = await db.suggestion.create({
     data: {
       ...rest,
       releaseYear: releaseYear ?? null,
+      imageNote: imageNote || null,
     },
   });
 

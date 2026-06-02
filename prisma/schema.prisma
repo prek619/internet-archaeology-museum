@@ -19,6 +19,7 @@ model Artifact {
   historicalImpact String?
   curatorNote      String?
   imageUrl         String?
+  imageNote        String?
   status           ArtifactStatus @default(DISCONTINUED)
   sourceType       SourceType     @default(ADMIN)
   suggestionId     String?        @unique
@@ -34,6 +35,7 @@ model Suggestion {
   purpose         String
   failureReason   String
   submitterName   String?
+  imageNote       String?
   status          SuggestionStatus @default(PENDING)
   rejectionReason String?
   artifact        Artifact?

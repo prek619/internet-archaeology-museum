@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import StatusBadge from "@/components/StatusBadge";
 import CuratorNote from "@/components/CuratorNote";
+import ArchivalNotice from "@/components/ArchivalNotice";
 import { ArtifactStatus } from "@/generated/prisma/client";
 
 export interface ArtifactCardData {
@@ -18,6 +19,7 @@ export interface ArtifactCardData {
   historicalImpact: string | null;
   curatorNote: string | null;
   imageUrl: string | null;
+  imageNote: string | null;
   status: ArtifactStatus;
 }
 
@@ -36,8 +38,8 @@ export default function ArtifactCard({ artifact }: ArtifactCardProps) {
         expanded ? "shadow-neo-lg -translate-y-1" : "hover:shadow-neo-lg hover:-translate-y-1",
       ].join(" ")}
     >
-      {/* Image or placeholder */}
-      <div className="relative border-b-4 border-black overflow-hidden bg-neo-bg h-48">
+      {/* Visual area — real image or archival notice */}
+      <div className="relative border-b-4 border-black overflow-hidden h-48">
         {artifact.imageUrl ? (
           <Image
             src={artifact.imageUrl}
@@ -47,14 +49,21 @@ export default function ArtifactCard({ artifact }: ArtifactCardProps) {
             unoptimized
           />
         ) : (
-          <div className="absolute inset-0 flex flex-col items-center justify-center halftone opacity-10" />
+          <ArchivalNotice
+            artifactId={artifact.id}
+            artifactName={artifact.name}
+            imageNote={artifact.imageNote}
+            className="h-full"
+          />
         )}
+
         {/* Exhibit number tag */}
         <div className="absolute top-3 left-3 bg-neo-secondary border-4 border-black px-2 py-1 shadow-neo-sm">
           <span className="font-black text-xs uppercase tracking-widest">
             {artifact.exhibitNumber}
           </span>
         </div>
+
         {/* Status badge */}
         <div className="absolute top-3 right-3">
           <StatusBadge status={artifact.status} />

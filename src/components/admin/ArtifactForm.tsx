@@ -163,8 +163,19 @@ export default function ArtifactForm({
             type="url"
             error={errors.imageUrl?.message}
             placeholder="https://example.com/image.jpg (optional)"
-            hint="Paste any publicly hosted image URL. Leave blank for placeholder."
+            hint="Paste any publicly hosted image URL. Leave blank to show an archival notice."
             {...register("imageUrl")}
+          />
+        </div>
+
+        <div className="md:col-span-2">
+          <Textarea
+            label="Why Is the Archival Image Unavailable?"
+            error={errors.imageNote?.message}
+            placeholder='e.g. "The photograph was filed under Electrical Concepts and has not been located since 2017."'
+            hint="Optional. Replaces the standard archival notice body. Leave blank to use an auto-generated notice."
+            rows={2}
+            {...register("imageNote")}
           />
         </div>
 

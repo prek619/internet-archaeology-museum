@@ -12,6 +12,7 @@ export default async function NewArtifactPage({
     purpose?: string;
     failureReason?: string;
     releaseYear?: string;
+    imageNote?: string;
   };
 }) {
   const sequence = await getNextExhibitSequence();
@@ -25,6 +26,7 @@ export default async function NewArtifactPage({
         releaseYear: searchParams.releaseYear
           ? parseInt(searchParams.releaseYear)
           : undefined,
+        imageNote: searchParams.imageNote ?? undefined,
       }
     : undefined;
 

@@ -118,6 +118,15 @@ export default function SuggestPage() {
               {...register("submitterName")}
             />
 
+            <Textarea
+              label="Why Is the Archival Image Unavailable?"
+              error={errors.imageNote?.message}
+              placeholder={`"The photograph was accidentally classified as weather."\n"The image remains in evidence."\n"The camera refused to continue."`}
+              rows={3}
+              hint="Optional. Invent a museum-style explanation. Institutional tone preferred."
+              {...register("imageNote")}
+            />
+
             {error && (
               <div className="border-4 border-neo-accent bg-neo-accent/10 p-4">
                 <p className="font-black text-sm text-neo-accent uppercase tracking-wide">

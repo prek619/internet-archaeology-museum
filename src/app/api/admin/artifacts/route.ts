@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const { imageUrl, ...rest } = parsed.data;
+  const { imageUrl, imageNote, ...rest } = parsed.data;
   const sequence = await getNextExhibitSequence();
   const exhibitNumber = formatExhibitNumber(sequence);
 
@@ -50,6 +50,7 @@ export async function POST(req: NextRequest) {
     data: {
       ...rest,
       imageUrl: imageUrl || null,
+      imageNote: imageNote || null,
       exhibitSequence: sequence,
       exhibitNumber,
       suggestionId: body.suggestionId ?? null,

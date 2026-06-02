@@ -17,6 +17,7 @@ export interface SuggestionData {
   purpose: string;
   failureReason: string;
   submitterName: string | null;
+  imageNote: string | null;
   status: SuggestionStatus;
   rejectionReason: string | null;
   createdAt: string;
@@ -42,9 +43,15 @@ export default function SuggestionCard({ suggestion }: SuggestionCardProps) {
   });
 
   const handleApprove = () => {
-    router.push(
-      `/admin/artifacts/new?fromSuggestion=${suggestion.id}&name=${encodeURIComponent(suggestion.name)}&purpose=${encodeURIComponent(suggestion.purpose)}&failureReason=${encodeURIComponent(suggestion.failureReason)}${suggestion.releaseYear ? `&releaseYear=${suggestion.releaseYear}` : ""}`
-    );
+    const params = new URLSearchParams({
+      fromSuggestion: suggestion.id,
+      name: suggestion.name,
+      purpose: suggestion.purpose,
+      failureReason: suggestion.failureReason,
+    });
+    if (suggestion.releaseYear) params.set("releaseYear", String(suggestion.releaseYear));
+    if (suggestion.imageNote) params.set("imageNote", suggestion.imageNote);
+    router.push(`/admin/artifacts/new?${params.toString()}`);
   };
 
   const handleReject = async (data: RejectionFormData) => {
@@ -130,6 +137,14 @@ export default function SuggestionCard({ suggestion }: SuggestionCardProps) {
           </span>
           <span className="font-bold text-sm">{suggestion.failureReason}</span>
         </div>
+        {suggestion.imageNote && (
+          <div>
+            <span className="font-black text-xs uppercase tracking-widest text-black/50">
+              Why No Image —{" "}
+            </span>
+            <span className="font-bold text-sm italic">{suggestion.imageNote}</span>
+          </div>
+        )}
         {suggestion.rejectionReason && (
           <div className="border-l-4 border-neo-accent pl-4 mt-3">
             <span className="font-black text-xs uppercase tracking-widest text-black/50 block mb-0.5">

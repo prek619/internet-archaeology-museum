@@ -30,6 +30,7 @@ export const artifactSchema = z.object({
     .optional()
     .nullable()
     .or(z.literal("")),
+  imageNote: z.string().max(500).optional().nullable(),
   status: z.enum(ArtifactStatusValues),
 });
 
@@ -39,6 +40,7 @@ export const suggestionSchema = z.object({
   purpose: z.string().min(1, "Purpose is required").max(1000),
   failureReason: z.string().min(1, "Failure reason is required").max(1000),
   submitterName: z.string().max(200).optional().nullable(),
+  imageNote: z.string().max(500).optional().nullable(),
 });
 
 export const rejectionSchema = z.object({

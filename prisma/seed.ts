@@ -19,6 +19,8 @@ const artifacts = [
     historicalImpact: "Negligible.",
     curatorNote:
       "This exhibit has been handled by four curators. Two requested transfers.",
+    imageNote:
+      "The photograph was taken. The stick was indistinguishable from other sticks. The photograph was not retained.",
     status: "DISCONTINUED" as const,
   },
   {
@@ -119,6 +121,8 @@ const artifacts = [
       "Cited once, in a footnote, in a paper about something else.",
     curatorNote:
       "The fork has been weighed. Results were not shared with the fork.",
+    imageNote:
+      "The camera used to photograph this exhibit recorded only the fork's weight data. This was considered a separate matter and was filed accordingly.",
     status: "DESTROYED" as const,
   },
   {

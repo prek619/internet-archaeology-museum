@@ -41,6 +41,7 @@ export default async function EditArtifactPage({
           historicalImpact: artifact.historicalImpact ?? undefined,
           curatorNote: artifact.curatorNote ?? undefined,
           imageUrl: artifact.imageUrl ?? undefined,
+          imageNote: artifact.imageNote ?? undefined,
           status: artifact.status,
         }}
       />

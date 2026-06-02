@@ -22,13 +22,16 @@ export default async function GalleryPage() {
       historicalImpact: true,
       curatorNote: true,
       imageUrl: true,
+      imageNote: true,
       status: true,
     },
   });
 
+  const artifactCount = artifacts.length;
+
   return (
-    <div className="min-h-screen bg-neo-bg">
-      {/* Header */}
+    <div className="min-h-screen bg-neo-bg paper-texture">
+      {/* Sticky header */}
       <header className="border-b-4 border-black bg-neo-bg sticky top-0 z-30">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
           <Link
@@ -52,18 +55,38 @@ export default async function GalleryPage() {
       </header>
 
       <main className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
-        {/* Gallery header */}
-        <div className="mb-10">
+        {/* Gallery heading block */}
+        <div className="mb-4">
           <h1 className="font-black text-4xl sm:text-6xl uppercase tracking-tighter leading-none mb-3">
             The Collection
           </h1>
-          <p className="font-bold text-base text-black/60">
-            {artifacts.length} artifact{artifacts.length !== 1 ? "s" : ""} on
-            permanent display.{" "}
-            {artifacts.length === 0
-              ? "The museum is preparing its inaugural exhibition."
-              : "Click any exhibit to view the full record."}
-          </p>
+          <div className="flex items-center gap-4 flex-wrap">
+            <p className="font-bold text-base text-black/60">
+              {artifactCount} artifact{artifactCount !== 1 ? "s" : ""} on permanent display.{" "}
+              {artifactCount === 0
+                ? "The museum is preparing its inaugural exhibition."
+                : "Click any exhibit to view the full record."}
+            </p>
+            {/* Inline stamp */}
+            <div className="border-4 border-black bg-neo-bg px-3 py-1 -rotate-1 shadow-neo-sm shrink-0">
+              <span className="font-black text-[10px] uppercase tracking-widest">
+                Open to the Public
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Halftone section rule */}
+        <div className="flex items-center gap-3 my-8">
+          <div className="flex-1 border-t-4 border-black" />
+          <div
+            className="w-24 h-4 opacity-20"
+            style={{
+              backgroundImage: "radial-gradient(#000 1.5px, transparent 1.5px)",
+              backgroundSize: "8px 8px",
+            }}
+          />
+          <div className="flex-1 border-t-4 border-black" />
         </div>
 
         {artifacts.length === 0 ? (
@@ -83,7 +106,31 @@ export default async function GalleryPage() {
           </div>
         )}
 
-        <div className="mt-16 border-t-4 border-black pt-6 flex justify-between items-center">
+        {/* Status key */}
+        {artifactCount > 0 && (
+          <div className="mt-12 border-4 border-black bg-white p-5">
+            <p className="font-black text-xs uppercase tracking-widest text-black/40 mb-3">
+              Status Key
+            </p>
+            <div className="flex flex-wrap gap-4">
+              {[
+                { label: "Active", bg: "bg-neo-secondary" },
+                { label: "Discontinued", bg: "bg-neo-bg" },
+                { label: "Destroyed", bg: "bg-black text-white" },
+                { label: "On Loan", bg: "bg-neo-muted" },
+              ].map(({ label, bg }) => (
+                <span
+                  key={label}
+                  className={`inline-block px-3 py-1 border-4 border-black font-black text-xs uppercase tracking-widest ${bg}`}
+                >
+                  {label}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div className="mt-8 border-t-4 border-black pt-6 flex justify-between items-center">
           <p className="font-black text-xs uppercase tracking-widest text-black/40">
             End of Collection
           </p>

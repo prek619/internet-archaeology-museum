@@ -37,11 +37,11 @@ export async function PATCH(
     );
   }
 
-  const { imageUrl, ...rest } = parsed.data;
+  const { imageUrl, imageNote, ...rest } = parsed.data;
 
   const artifact = await db.artifact.update({
     where: { id: params.id },
-    data: { ...rest, imageUrl: imageUrl || null },
+    data: { ...rest, imageUrl: imageUrl || null, imageNote: imageNote || null },
   });
 
   return NextResponse.json(artifact);
