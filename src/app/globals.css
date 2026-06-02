@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&display=block');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    background-color: #FFFDF5;
+  }
+
+  body {
+    background-color: #FFFDF5;
+    color: #000000;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 900;
+  }
+
+  ::selection {
+    background-color: #FFD93D;
+    color: #000000;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-spin-slow,
+    .animate-bounce,
+    .animate-pulse,
+    .animate-marquee {
+      animation: none;
+    }
+  }
+}
+
+@layer utilities {
+  .halftone {
+    background-image: radial-gradient(#000 1.5px, transparent 1.5px);
+    background-size: 20px 20px;
+  }
+
+  .halftone-lg {
+    background-image: radial-gradient(circle, #000 2px, transparent 2.5px);
+    background-size: 30px 30px;
+  }
+
+  .grid-pattern {
+    background-size: 40px 40px;
+    background-image:
+      linear-gradient(to right, rgba(0, 0, 0, 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+  }
+
+  .text-stroke {
+    -webkit-text-stroke: 2px #000;
+    color: transparent;
+  }
+
+  .text-stroke-white {
+    -webkit-text-stroke: 2px #fff;
+    color: transparent;
+  }
+
+  .push-active:active {
+    transform: translate(2px, 2px);
+    box-shadow: none !important;
+  }
+
+  .card-lift {
+    transition: transform 200ms ease-out, box-shadow 200ms ease-out;
+  }
+  .card-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 12px 12px 0px 0px #000;
+  }
+}

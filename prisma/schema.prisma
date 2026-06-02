@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Artifact {
+  id               String         @id @default(cuid())
+  exhibitNumber    String         @unique
+  exhibitSequence  Int            @unique
+  name             String
+  releaseYear      Int?
+  inventor         String?
+  purpose          String
+  failureReason    String
+  historicalImpact String?
+  curatorNote      String?
+  imageUrl         String?
+  status           ArtifactStatus @default(DISCONTINUED)
+  sourceType       SourceType     @default(ADMIN)
+  suggestionId     String?        @unique
+  suggestion       Suggestion?    @relation(fields: [suggestionId], references: [id])
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+}
+
+model Suggestion {
+  id              String           @id @default(cuid())
+  name            String
+  releaseYear     Int?
+  purpose         String
+  failureReason   String
+  submitterName   String?
+  status          SuggestionStatus @default(PENDING)
+  rejectionReason String?
+  artifact        Artifact?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+}
+
+model VisitorCount {
+  id    Int @id @default(autoincrement())
+  count Int @default(47291)
+}
+
+enum ArtifactStatus {
+  ACTIVE
+  DISCONTINUED
+  DESTROYED
+  ON_LOAN
+}
+
+enum SuggestionStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum SourceType {
+  ADMIN
+  SUGGESTION
+}
