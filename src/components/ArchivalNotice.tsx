@@ -90,10 +90,6 @@ export default function ArchivalNotice({
           {displayText}
         </p>
 
-        {/* Reference footer */}
-        <p className="font-black text-[8px] uppercase tracking-widest text-black/25 mt-2">
-          Ref. {artifactId.slice(-6).toUpperCase()}
-        </p>
       </div>
     </div>
   );

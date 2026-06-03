@@ -27,13 +27,6 @@ interface ArtifactCardProps {
   artifact: ArtifactCardData;
 }
 
-const statusAccent: Record<ArtifactStatus, string> = {
-  ACTIVE:       "border-l-[6px] border-l-neo-secondary",
-  DISCONTINUED: "border-l-[6px] border-l-black",
-  DESTROYED:    "border-l-[6px] border-l-neo-accent",
-  ON_LOAN:      "border-l-[6px] border-l-neo-muted",
-};
-
 export default function ArtifactCard({ artifact }: ArtifactCardProps) {
   const [expanded, setExpanded] = useState(false);
 
@@ -41,7 +34,6 @@ export default function ArtifactCard({ artifact }: ArtifactCardProps) {
     <div
       className={[
         "bg-white border-4 border-black",
-        statusAccent[artifact.status],
         "shadow-neo-md transition-all duration-200",
         expanded ? "shadow-neo-lg -translate-y-1" : "hover:shadow-neo-lg hover:-translate-y-1",
       ].join(" ")}
