@@ -27,6 +27,13 @@ interface ArtifactCardProps {
   artifact: ArtifactCardData;
 }
 
+const statusHeaderBg: Record<ArtifactStatus, string> = {
+  ACTIVE:       "bg-neo-secondary/20",
+  DISCONTINUED: "bg-neo-bg",
+  DESTROYED:    "bg-neo-accent/10",
+  ON_LOAN:      "bg-neo-muted/25",
+};
+
 export default function ArtifactCard({ artifact }: ArtifactCardProps) {
   const [expanded, setExpanded] = useState(false);
 
@@ -38,8 +45,8 @@ export default function ArtifactCard({ artifact }: ArtifactCardProps) {
         expanded ? "shadow-neo-lg -translate-y-1" : "hover:shadow-neo-lg hover:-translate-y-1",
       ].join(" ")}
     >
-      {/* Visual area — real image or archival notice */}
-      <div className="relative border-b-4 border-black h-48 overflow-hidden">
+      {/* Visual area — tinted by status; image or archival notice renders inside */}
+      <div className={`relative border-b-4 border-black h-48 overflow-hidden ${statusHeaderBg[artifact.status]}`}>
         {artifact.imageUrl ? (
           <Image
             src={artifact.imageUrl}

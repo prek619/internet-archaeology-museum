@@ -53,7 +53,7 @@ export default function ArchivalNotice({
     <div
       className={[
         'relative w-full h-full',
-        'bg-neo-bg',
+        'bg-transparent',
         'flex flex-col justify-between',
         className,
       ].join(' ')}
