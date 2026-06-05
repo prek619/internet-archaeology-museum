@@ -134,7 +134,7 @@ export default async function GalleryPage() {
                   { label: "Discontinued",  bg: "bg-neo-bg",                            accent: "border-l-[6px] border-l-black" },
                   { label: "Destroyed",     bg: "bg-neo-accent",                        accent: "border-l-[6px] border-l-neo-accent" },
                   { label: "On Loan",       bg: "bg-neo-muted",                         accent: "border-l-[6px] border-l-neo-muted" },
-                ].map(({ label, bg, accent }) => (
+                ].map(({ label, bg }) => (
                   <div key={label} className="flex items-center gap-2">
                     <div className={`w-4 h-4 border-4 border-black ${bg}`} />
                     <span className="font-black text-xs uppercase tracking-widest">
