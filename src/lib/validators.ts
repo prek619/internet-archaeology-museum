@@ -11,8 +11,8 @@ export const ArtifactStatusValues = [
 const yearField = z
   .number()
   .int()
-  .min(1800)
-  .max(new Date().getFullYear() + 10)
+  .min(1)
+  .max(9999)
   .nullable()
   .optional();
 

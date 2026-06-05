@@ -1,4 +1,4 @@
-import { getIronSession, SessionOptions } from "iron-session";
+import { getIronSession, IronSession, SessionOptions } from "iron-session";
 import { cookies } from "next/headers";
 
 export interface SessionData {
@@ -15,12 +15,13 @@ export const sessionOptions: SessionOptions = {
   },
 };
 
-export function getSession() {
+// Returns a Promise — used with await in Server Components and API routes (read-only)
+export function getSession(): Promise<IronSession<SessionData>> {
   return getIronSession<SessionData>(cookies(), sessionOptions);
 }
 
-export function requireAdmin() {
-  const session = getSession();
+export async function requireAdmin(): Promise<IronSession<SessionData> | null> {
+  const session = await getSession();
   if (!session.isAdmin) return null;
   return session;
 }

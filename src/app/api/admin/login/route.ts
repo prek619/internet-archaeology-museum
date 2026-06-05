@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { cookies } from "next/headers";
 import { getIronSession } from "iron-session";
+import { cookies } from "next/headers";
 import { sessionOptions, SessionData } from "@/lib/auth";
 import { loginSchema } from "@/lib/validators";
 
@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
   }
 
-  const session = getIronSession<SessionData>(cookies(), sessionOptions);
+  const session = await getIronSession<SessionData>(cookies(), sessionOptions);
   session.isAdmin = true;
   await session.save();
 
